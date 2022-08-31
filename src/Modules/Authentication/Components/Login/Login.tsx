@@ -14,22 +14,27 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from '@mantine/form';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { LoginUser } from '../../../../app/interface/auth/authLogin';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, authSelector } from '../../../../app/store';
 import { login } from '../../slice/authSlice';
+import Home from '../../../Home/Pages/Home';
 
 const Login = () => {
   const [isError, setIsError] = useState<boolean>(false);
-  const { isLoading, error } = useSelector(authSelector);
+  const { accessToken, isLoading, error } = useSelector(authSelector);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const submitHandler = (values: LoginUser) => {
-    dispatch(login(values));
-    setIsError(false);
-    navigate(-1);
+  const submitHandler = async (values: LoginUser) => {
+    try {
+      await dispatch(login(values)).unwrap();
+      setIsError(false);
+      navigate(-1);
+    } catch (error) {
+      setIsError(true);
+    }
   };
 
   useEffect(() => {
@@ -57,6 +62,10 @@ const Login = () => {
         value === '' ? 'Mật khẩu không được để trống' : null,
     },
   });
+
+  if (accessToken) {
+    return <Navigate to='/' />;
+  }
 
   return (
     <Card
