@@ -37,7 +37,7 @@ const TheaterShowtime = ({ theaterCluster, theaterId }: Props) => {
           gutter={24}
           sx={(theme) => ({
             height: theme.breakpoints.xs ? 640 : 320,
-            overflowY: 'scroll',
+            overflowY: 'overlay',
           })}
         >
           {movieList?.map((item) => {
