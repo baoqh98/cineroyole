@@ -1,56 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, { Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import AuthPage from './Modules/Authentication/Pages/AuthPage';
+
+// import Home from './Modules/Home/Pages/Home';
+// import Movie from './Modules/Movie/Pages/Movie';
+// import Purchase from './Modules/Purchase/Pages/Purchase';
+import Login from './Modules/Authentication/Components/Login';
+import Register from './Modules/Authentication/Components/Register';
+
+const Home = React.lazy(() => import('./Modules/Home/Pages/Home'));
+const Movie = React.lazy(() => import('./Modules/Movie/Pages/Movie'));
+const Purchase = React.lazy(() => import('./Modules/Purchase/Pages/Purchase'));
+// const Login = React.lazy(
+//   () => import('./Modules/Authentication/Components/Login')
+// );
+// const Register = React.lazy(
+//   () => import('./Modules/Authentication/Components/Register')
+// );
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div className='App'>
+      <Suspense>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/movie/:movieId' element={<Movie />} />
+          <Route path='/purchase/:showtimeId' element={<Purchase />} />
+
+          <Route path='/auth' element={<AuthPage />}>
+            <Route path='login' element={<Login />} />
+            <Route path='register' element={<Register />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </div>
   );
 }
