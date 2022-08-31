@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import ReactDom from 'react-dom';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, theaterMovieShowtimeSelector } from '../../../app/store';
@@ -16,12 +15,16 @@ import {
   Grid,
   Group,
   Image,
+  Modal,
   Space,
   Text,
 } from '@mantine/core';
 import { getTheaterMovieShowtime } from '../slice/theaterMovieShowtimeSlice';
+import { useScrollIntoView } from '@mantine/hooks';
 
 const Movie = () => {
+  const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { movieId } = useParams();
   const { theaterMovieShowtime: movieDetail, isLoading } = useSelector(
     theaterMovieShowtimeSelector
@@ -34,6 +37,39 @@ const Movie = () => {
 
   return (
     <>
+      <Modal
+        sx={(theme) => ({
+          backgroundColor: 'transparent',
+          color: 'transparent',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        })}
+        transitionDuration={100}
+        onClose={() => setIsModalOpen(false)}
+        opened={isModalOpen}
+        fullScreen
+        centered
+        closeOnEscape
+      >
+        <iframe
+          style={{
+            marginTop: '56px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '90%',
+          }}
+          src={movieDetail?.trailer}
+          title={movieDetail?.biDanh}
+          frameBorder='0'
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+          allowFullScreen
+        ></iframe>
+      </Modal>
       {!isLoading && (
         <BackgroundImage
           sx={(theme) => ({
@@ -139,6 +175,7 @@ const Movie = () => {
                       radius='xl'
                       size='lg'
                       variant='light'
+                      onClick={() => setIsModalOpen(true)}
                     >
                       <Text size={18} mr={8}>
                         Trailer
@@ -151,6 +188,7 @@ const Movie = () => {
                       }}
                       radius='xl'
                       size='lg'
+                      onClick={() => scrollIntoView()}
                     >
                       <Text size={18} mr={8}>
                         Đặt vé
@@ -165,7 +203,7 @@ const Movie = () => {
           {movieDetail && (
             <Showtime theaterSystem={movieDetail?.heThongRapChieu || []} />
           )}
-          <Space h={80} />
+          <Space ref={targetRef} h={80} />
         </BackgroundImage>
       )}
     </>

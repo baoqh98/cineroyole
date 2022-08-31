@@ -13,6 +13,7 @@ import {
   Space,
 } from '@mantine/core';
 import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface LichChieuPhim {
   maLichChieu: string;
@@ -43,6 +44,7 @@ interface Props {
 }
 
 const Showtime = ({ theaterSystem }: Props) => {
+  const navigate = useNavigate();
   const defaultValue = theaterSystem[0]?.maHeThongRap || '';
   const [theaterCluster, setTheaterCluster] = useState<string>(defaultValue);
 
@@ -82,6 +84,7 @@ const Showtime = ({ theaterSystem }: Props) => {
               >
                 <Text>{item.tenRap}:</Text>
                 <Button
+                  onClick={() => navigate(`/purchase/${item.maLichChieu}`)}
                   variant='light'
                   size='sm'
                   color='green'

@@ -72,8 +72,16 @@ const Login = () => {
       sx={(theme) => ({
         backgroundColor: 'transparent',
         width: '50%',
+        [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+          width: '80%',
+        },
+        [`@media (max-width: 375px)`]: {
+          width: '100%',
+        },
       })}
     >
+      <Space h={24} />
+
       <Center>
         <Title order={1}>Đăng nhập</Title>
       </Center>

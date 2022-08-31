@@ -61,10 +61,24 @@ const Register = () => {
       sx={(theme) => ({
         backgroundColor: 'transparent',
         width: '50%',
+        [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+          width: '80%',
+        },
+        [`@media (max-width: 375px)`]: {
+          width: '100%',
+        },
       })}
     >
+      <Space h={24} />
       <Center>
-        <Title order={1}>Đăng Ký Tài Khoản</Title>
+        <Title
+          sx={{
+            textAlign: 'center',
+          }}
+          order={1}
+        >
+          Đăng Ký Tài Khoản
+        </Title>
       </Center>
 
       <Space h={24} />

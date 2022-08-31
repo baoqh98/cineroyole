@@ -39,48 +39,56 @@ const Purchase = () => {
 
   return (
     <>
-      <Container size={1200}>
-        <Space h={48} />
-        <Title order={1}>Let book your ticket</Title>
+      {isLoading && (
         <>
+          <Space h={240} />
+          <Loader size={50} />
+        </>
+      )}
+      {!isLoading && (
+        <Container size={1200}>
           <Space h={48} />
-          <Grid gutter='xl'>
-            <Grid.Col sm={8} xs={12} span={mobileSize ? 12 : undefined}>
-              <TicketSelection
-                movieDetail={movieDetail as ThongTinPhim}
-                seats={seats}
-              />
-            </Grid.Col>
-            {!mobileSize && (
-              <Grid.Col sm={4} xs={12} span={mobileSize ? 12 : undefined}>
-                <TicketsDetail
+          <Title order={1}>Let book your ticket</Title>
+          <>
+            <Space h={48} />
+            <Grid gutter='xl'>
+              <Grid.Col sm={8} xs={12} span={mobileSize ? 12 : undefined}>
+                <TicketSelection
                   movieDetail={movieDetail as ThongTinPhim}
                   seats={seats}
                 />
               </Grid.Col>
-            )}
-            <Modal
-              opened={openedModal}
-              onClose={() => setOpenedModal(false)}
-              color='red'
-              transition='rotate-left'
-              centered
-            >
-              <TicketsDetail
-                movieDetail={movieDetail as ThongTinPhim}
-                seats={seats}
-              />
-            </Modal>
-          </Grid>
-        </>
-        {mobileSize && (
-          <Box
-            sx={{
-              height: 80,
-            }}
-          />
-        )}
-      </Container>
+              {!mobileSize && (
+                <Grid.Col sm={4} xs={12} span={mobileSize ? 12 : undefined}>
+                  <TicketsDetail
+                    movieDetail={movieDetail as ThongTinPhim}
+                    seats={seats}
+                  />
+                </Grid.Col>
+              )}
+              <Modal
+                opened={openedModal}
+                onClose={() => setOpenedModal(false)}
+                color='red'
+                transition='rotate-left'
+                centered
+              >
+                <TicketsDetail
+                  movieDetail={movieDetail as ThongTinPhim}
+                  seats={seats}
+                />
+              </Modal>
+            </Grid>
+          </>
+          {mobileSize && (
+            <Box
+              sx={{
+                height: 80,
+              }}
+            />
+          )}
+        </Container>
+      )}
 
       {mobileSize && (
         <Group
