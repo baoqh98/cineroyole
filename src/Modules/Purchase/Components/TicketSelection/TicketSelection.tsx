@@ -102,6 +102,16 @@ const TicketSelection = ({ seats, movieDetail }: Props) => {
     dispatch(removeAllTicketsAction());
   };
 
+  const closeModalHandler = () => {
+    if (modalState.successModal) {
+      dispatch(getTickets(movieDetail.maLichChieu.toString()));
+      dispatchModal({ type: 'CLOSE' });
+      removeAllHandler();
+      return;
+    }
+    dispatchModal({ type: 'CLOSE' });
+  };
+
   const bookTicketsHandler = () => {
     const ticket = {
       maLichChieu: movieDetail.maLichChieu,
@@ -112,15 +122,16 @@ const TicketSelection = ({ seats, movieDetail }: Props) => {
       dispatchModal({ type: 'UNSELECTED' });
       return;
     }
+
     if (userData) {
       dispatch(
         bookTickets({
           selectedTicket: ticket,
           showtimeId: movieDetail.maLichChieu.toString(),
-          accessToken: userData.accessToken,
         })
-      ).then(({ payload }) => dispatchModal({ type: 'SUCCESS', payload }));
-      removeAllHandler();
+      )
+        .unwrap()
+        .then((data) => dispatchModal({ type: 'SUCCESS', payload: data }));
     } else {
       dispatchModal({ type: 'LOGIN' });
     }
@@ -184,7 +195,7 @@ const TicketSelection = ({ seats, movieDetail }: Props) => {
         <Space h={24} />
         <Group position='right'>
           <Button
-            onClick={() => dispatchModal({ type: 'CLOSE' })}
+            onClick={closeModalHandler}
             variant='light'
             radius='sm'
             color='red'

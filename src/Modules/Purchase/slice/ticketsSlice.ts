@@ -31,17 +31,16 @@ export const getTickets = createAsyncThunk(
 export const bookTickets = createAsyncThunk(
   'purchase/tickets/bookTickets',
   async (
-    { selectedTicket, showtimeId, accessToken }: TicketBooking,
-    { rejectWithValue, dispatch }
+    { selectedTicket, showtimeId }: TicketBooking,
+    { rejectWithValue }
   ) => {
     try {
       const { ticketAPI } = cineAPI;
       const data = await ticketAPI.bookTickets({
         selectedTicket,
         showtimeId,
-        accessToken,
       });
-      dispatch(getTickets(showtimeId));
+      // dispatch(getTickets(showtimeId));
       return data;
     } catch (error) {
       return rejectWithValue(error);

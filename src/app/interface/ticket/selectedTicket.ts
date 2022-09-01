@@ -11,5 +11,4 @@ export interface SelectedTickets {
 export interface TicketBooking {
   selectedTicket: SelectedTickets;
   showtimeId: string;
-  accessToken: string;
 }

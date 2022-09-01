@@ -10,16 +10,15 @@ import {
   Text,
   Space,
 } from '@mantine/core';
-import Logo from '../../../../UI/Logo/Logo';
+import Logo from '../../../UI/Logo/Logo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useDisclosure } from '@mantine/hooks';
 import { useNavigate } from 'react-router-dom';
-import { logOut } from '../../../Authentication/slice/authSlice';
+import { logOut } from '../../../Modules/Authentication/slice/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, authSelector } from '../../../../app/store';
-import { useState } from 'react';
+import { AppDispatch, authSelector } from '../../../app/store';
 
 const HEADER_HEIGHT = 60;
 
@@ -53,14 +52,13 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === 'dark'
         ? theme.colors.dark[0]
         : theme.colors.gray[7],
-    fontSize: theme.fontSizes.sm,
-    fontWeight: 500,
+    fontSize: theme.fontSizes.lg,
+    fontWeight: 700,
+    transition: 'all ease 0.2s',
 
     '&:hover': {
-      backgroundColor:
-        theme.colorScheme === 'dark'
-          ? theme.colors.dark[6]
-          : theme.colors.gray[0],
+      backgroundColor: theme.colors.dark[6],
+      color: theme.colors.blue[4],
     },
   },
 

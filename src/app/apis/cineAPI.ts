@@ -106,17 +106,10 @@ const ticketAPI = {
       }
     );
   },
-  bookTickets: ({ selectedTicket, accessToken }: TicketBooking) => {
-    // const config = {
-    //   headers: { Authorization: `Bearer ${accessToken}` },
-    // };
-    return axiosClient.post<unknown, TicketBooking>(
-      'QuanLyDatVe/DatVe',
-      {
-        ...selectedTicket,
-      }
-      // config
-    );
+  bookTickets: ({ selectedTicket }: TicketBooking) => {
+    return axiosClient.post<unknown, TicketBooking>('QuanLyDatVe/DatVe', {
+      ...selectedTicket,
+    });
   },
 };
 
