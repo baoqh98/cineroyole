@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestHeaders } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { store } from '../store';
 
 const axiosClient = axios.create({
@@ -9,12 +9,19 @@ const axiosClient = axios.create({
   },
 });
 
-// axiosClient.interceptors.request.use((config) => {
-//   const accessToken = store.getState().auth.accessToken;
-//   if (accessToken) {
-//     config.headers!.Authorization = `Bearer ${accessToken}`;
-//   }
-// });
+axiosClient.interceptors.request.use(
+  (config) => {
+    const accessToken = store.getState().auth.accessToken;
+    if (config.headers === undefined) {
+      config.headers = {};
+    }
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => error
+);
 
 axiosClient.interceptors.response.use(
   (response) => {
