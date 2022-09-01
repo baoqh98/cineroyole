@@ -10,16 +10,16 @@ import {
   Title,
   Modal,
   Alert,
+  Box,
 } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faTriangleExclamation, faX } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from '@mantine/form';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { LoginUser } from '../../../../app/interface/auth/authLogin';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, authSelector } from '../../../../app/store';
 import { login } from '../../slice/authSlice';
-import Home from '../../../Home/Pages/Home';
 
 const Login = () => {
   const [isError, setIsError] = useState<boolean>(false);
@@ -80,12 +80,29 @@ const Login = () => {
         },
       })}
     >
+      <Box
+        sx={(theme) => ({
+          display: 'inline-block',
+          marginLeft: 'auto',
+          padding: '11px 16px',
+          border: `1px solid`,
+          borderColor: theme.colors.gray[2],
+          borderRadius: '50%',
+          fontSize: '12px',
+          cursor: 'pointer',
+          transition: 'all ease 0.2s',
+          '&:hover': {
+            backgroundColor: theme.colors.dark[6],
+          },
+        })}
+        onClick={() => navigate('/')}
+      >
+        <FontAwesomeIcon icon={faX} />
+      </Box>
       <Space h={24} />
-
       <Center>
         <Title order={1}>Đăng nhập</Title>
       </Center>
-
       <Space h={24} />
       <form onSubmit={formValidate.onSubmit(submitHandler)}>
         <TextInput

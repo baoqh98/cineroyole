@@ -1,12 +1,19 @@
 import { createStyles } from '@mantine/core';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Size } from './LogoStyle';
 
 const Logo = ({ size, name }: Size) => {
+  const navigate = useNavigate();
   return (
-    <div>
+    <div
+      style={{
+        cursor: 'pointer',
+      }}
+      onClick={() => navigate('/')}
+    >
       <img
-        src='https://w7.pngwing.com/pngs/130/1021/png-transparent-movie-logo-movie-logo-film-tape-cinema.png'
+        src='/kisspng-cinema-film-director-television-film-digital-millennium-copyright-act-5b23cf472887a5.197278891529073479166-removebg-preview.png'
         height={size}
         width={'100%'}
         style={{

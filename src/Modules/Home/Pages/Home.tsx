@@ -4,7 +4,6 @@ import { Space } from '@mantine/core';
 import BannerCarousel from '../Components/BannerCarousel';
 import MovieShowing from '../Components/MovieShowing';
 import Theater from '../Components/Theater';
-import News from '../Components/News';
 
 const Home = () => {
   return (

@@ -9,8 +9,10 @@ import {
   Group,
   Button,
   Alert,
+  Box,
 } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import useRequest from '../../../../app/hooks/useRequest';
@@ -69,6 +71,25 @@ const Register = () => {
         },
       })}
     >
+      <Box
+        sx={(theme) => ({
+          display: 'inline-block',
+          marginLeft: 'auto',
+          padding: '11px 16px',
+          border: `1px solid`,
+          borderColor: theme.colors.gray[2],
+          borderRadius: '50%',
+          fontSize: '12px',
+          cursor: 'pointer',
+          transition: 'all ease 0.2s',
+          '&:hover': {
+            backgroundColor: theme.colors.dark[6],
+          },
+        })}
+        onClick={() => navigate('/')}
+      >
+        <FontAwesomeIcon icon={faX} />
+      </Box>
       <Space h={24} />
       <Center>
         <Title

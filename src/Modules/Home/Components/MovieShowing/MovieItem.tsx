@@ -81,7 +81,7 @@ const MovieItem = ({ movie }: Props) => {
           {moTa}
         </Text>
         <Button variant='light' color='blue' fullWidth radius='md'>
-          Book Ticket
+          Đặt vé
         </Button>
       </Group>
     </Box>

@@ -20,7 +20,7 @@ import { logOut } from '../../../Modules/Authentication/slice/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, authSelector } from '../../../app/store';
 
-const HEADER_HEIGHT = 60;
+const HEADER_HEIGHT = 80;
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -125,7 +125,15 @@ const HeaderNavigation = ({ links }: HeaderActionProps) => {
   });
 
   return (
-    <Header height={HEADER_HEIGHT} sx={{ borderBottom: 0 }} mb={16}>
+    <Header
+      height={HEADER_HEIGHT}
+      sx={{
+        borderBottom: 0,
+        position: 'fixed',
+        boxShadow:
+          'rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px',
+      }}
+    >
       <Container className={classes.inner} fluid>
         <Group>
           <Burger
@@ -134,7 +142,7 @@ const HeaderNavigation = ({ links }: HeaderActionProps) => {
             className={classes.burger}
             size='sm'
           />
-          <Logo size={48} />
+          <Logo size={100} />
         </Group>
         <Group spacing={5} className={classes.links}>
           {items}
@@ -157,7 +165,7 @@ const HeaderNavigation = ({ links }: HeaderActionProps) => {
               sx={{ height: 36 }}
               onClick={() => navigate('/auth/login')}
             >
-              Login
+              Đăng nhập
             </Button>
             <Button
               variant='outline'
@@ -165,7 +173,7 @@ const HeaderNavigation = ({ links }: HeaderActionProps) => {
               sx={{ height: 36 }}
               onClick={() => navigate('/auth/register')}
             >
-              Register
+              Đăng ký
             </Button>
           </Group>
         )}

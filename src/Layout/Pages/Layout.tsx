@@ -1,3 +1,4 @@
+import { Space } from '@mantine/core';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from '../Modules/Footer';
@@ -79,29 +80,30 @@ const dataFooter = [
 const linksHeader = [
   {
     link: '/',
-    label: 'Home',
+    label: 'Trang chủ',
   },
   {
     link: '/',
-    label: 'Showtimes',
+    label: 'Lịch chiếu',
   },
   {
     link: '/',
-    label: 'News',
+    label: 'Tin tức',
   },
   {
     link: '/',
-    label: 'App',
+    label: 'Ứng dụng',
   },
   {
     link: '/',
-    label: 'About',
+    label: 'Về chúng tôi',
   },
 ];
 
 const Layout = () => {
   return (
     <>
+      <Space h={80} />
       <HeaderNavigation links={linksHeader} />
       <Outlet />
       <Footer data={dataFooter} />
