@@ -29,9 +29,10 @@ const Login = () => {
 
   const submitHandler = async (values: LoginUser) => {
     try {
-      await dispatch(login(values)).unwrap();
+      await dispatch(login(values))
+        .unwrap()
+        .then(() => navigate(-1));
       setIsError(false);
-      navigate(-1);
     } catch (error) {
       setIsError(true);
     }
@@ -62,10 +63,6 @@ const Login = () => {
         value === '' ? 'Mật khẩu không được để trống' : null,
     },
   });
-
-  if (accessToken) {
-    return <Navigate to='/' />;
-  }
 
   return (
     <Card

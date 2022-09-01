@@ -118,6 +118,8 @@ const TicketSelection = ({ seats, movieDetail }: Props) => {
       danhSachVe: danhSachVe,
     };
 
+    console.log(ticket);
+
     if (danhSachVe.length === 0) {
       dispatchModal({ type: 'UNSELECTED' });
       return;
