@@ -121,9 +121,19 @@ const Movie = () => {
                   })}
                 >
                   <Group>
-                    {movieDetail?.dangChieu && !movieDetail?.sapChieu && (
+                    {movieDetail?.dangChieu ? (
                       <Badge size='xl' radius='md' variant='filled'>
                         Đang chiếu
+                      </Badge>
+                    ) : movieDetail?.sapChieu ? (
+                      <Badge size='xl' radius='md' variant='light'>
+                        Sắp chiếu
+                      </Badge>
+                    ) : null}
+
+                    {movieDetail?.hot && (
+                      <Badge size='xl' radius='md' color='red' variant='light'>
+                        Hot
                       </Badge>
                     )}
                     <Badge
